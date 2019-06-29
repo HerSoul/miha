@@ -1,0 +1,147 @@
+$prefix = 'mi';
+// colors
+$primary:         #1890ff !default;
+$secondary:       #0cd1e8 !default;
+$tertiary:        #7044ff !default;
+$success:         #10dc60 !default;
+$warning:         #ffce00 !default;
+$danger:          #f04141 !default;
+$light:           #f4f5f8 !default;
+$medium:          #989aa2 !default;
+$dark:            #222428 !default;
+
+// Color map should provide
+// - base: main color to be used.
+// - contrast: Color that will provide readable text against the base color
+// - shade: 12% darker version of the base color (mix with black)
+// - tint: 10% lighter version of the base color (mix with white)
+$colors:  (
+  primary: (
+    base:             $primary,
+    contrast:         #fff,
+    shade:            get-color-shade($primary),
+    tint:             get-color-tint($primary)
+  ),
+  secondary: (
+    base:             $secondary,
+    contrast:         #fff,
+    shade:            get-color-shade($secondary),
+    tint:             get-color-tint($secondary)
+  ),
+  tertiary: (
+    base:             $tertiary,
+    contrast:         #fff,
+    shade:            get-color-shade($tertiary),
+    tint:             get-color-tint($tertiary)
+  ),
+  success: (
+    base:             $success,
+    contrast:         #fff,
+    shade:            get-color-shade($success),
+    tint:             get-color-tint($success)
+  ),
+  warning: (
+    base:             $warning,
+    contrast:         #fff,
+    shade:            get-color-shade($warning),
+    tint:             get-color-tint($warning)
+  ),
+  danger: (
+    base:             $danger,
+    contrast:         #fff,
+    shade:            get-color-shade($danger),
+    tint:             get-color-tint($danger)
+  ),
+  light: (
+    base:             $light,
+    contrast:         #000,
+    shade:            get-color-shade($light),
+    tint:             get-color-tint($light)
+  ),
+  medium: (
+    base:             $medium,
+    contrast:         #fff,
+    shade:            get-color-shade($medium),
+    tint:             get-color-tint($medium)
+  ),
+  dark: (
+    base:             $dark,
+    contrast:         #fff,
+    shade:            get-color-shade($dark),
+    tint:             get-color-tint($dark)
+  )
+) !default;
+
+$body-background:#fff;
+$component-background: #fff;
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+'Segoe UI Emoji', 'Segoe UI Symbol';
+$code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+$font-feature-settings-base:'tnum';
+$font-size-base: 14px;
+$font-size-lg: $font-size-base + 2px;
+$font-size-sm: 12px;
+$line-height-base: 1.5;
+$border-radius-base: 4px;
+$border-radius-sm: 2px;
+
+$heading-1-size: ceil($font-size-base * 2.71);
+$heading-2-size: ceil($font-size-base * 2.14);
+$heading-3-size: ceil($font-size-base * 1.71);
+$heading-4-size: ceil($font-size-base * 1.42);
+
+
+// Animation
+$animation-duration-slow: 0.3s; // Modal
+$animation-duration-base: 0.2s;
+$animation-duration-fast: 0.1s; // Tooltip
+$ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
+$ease-base-in: cubic-bezier(0.9, 0, 0.3, 0.7);
+$ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+$ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+$ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+$ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46);
+$ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+
+// Border color
+$border-color-base: hsl(0, 0, 85%); // base border outline a component
+$border-color-split: hsl(0, 0, 91%); // split border inside a component
+$border-color-inverse: $light;
+$border-width-base: 1px; // width of the border for a component
+$border-style-base: solid; // style of a components border
+// LINK
+$link-color: $primary;
+$link-hover-color:  get-color-tint($success);
+$link-active-color: get-color-shade($success);
+$link-decoration: none;
+$link-hover-decoration: none;
+// Outline
+$outline-blur-size: 0;
+$outline-width: 2px;
+$outline-color: $primary;
+
+$background-color-light: hsl(0, 0, 98%); // background of header and selected item
+$background-color-base: hsl(0, 0, 96%); // Default grey background color
+
+// Disabled states
+$disabled-color: fade(#000, 25%);
+$disabled-bg: $background-color-base;
+$disabled-color-dark: fade(#fff, 35%);
+
+// Shadow
+$shadow-color: rgba(0, 0, 0, 0.15);
+$shadow-color-inverse: $component-background;
+$shadow-1-up: 0 -2px 8px $shadow-color;
+$shadow-1-down: 0 2px 8px $shadow-color;
+$shadow-1-left: -2px 0 8px $shadow-color;
+$shadow-1-right: 2px 0 8px $shadow-color;
+$box-shadow-base: $shadow-1-down;
+$shadow-2: 0 4px 12px $shadow-color;
