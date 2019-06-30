@@ -6,56 +6,124 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  BtnType,
+  Color,
+  Size,
+} from './interface';
 
 export namespace Components {
-  interface MyComponent {
+  interface MiButton {
     /**
-    * The first name
+    * 按钮颜色，可选值见 colors
     */
-    'first': string;
+    'color': Color;
     /**
-    * The last name
+    * 是否禁用按钮
     */
-    'last': string;
+    'disabled': boolean;
     /**
-    * The middle name
+    * 将按钮宽度调整为其父宽度
     */
-    'middle': string;
+    'full': boolean;
+    /**
+    * 点击跳转的地址，指定此属性 button 的行为和 a 链接一致
+    */
+    'href': string;
+    /**
+    * 设置 button 原生的 type 值，可选值请参考 HTML 标准
+    */
+    'htmlType': string;
+    /**
+    * 设置按钮载入状态
+    */
+    'loading': boolean;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 设置按钮形状
+    */
+    'shape': 'circle' | 'round';
+    /**
+    * 设置按钮大小，可选值为 small large 或者不设
+    */
+    'size': Size;
+    /**
+    * a 链接的 target 属性，href 存在时生效
+    */
+    'target': string;
+    /**
+    * 按钮类型
+    */
+    'variant': BtnType;
   }
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLMiButtonElement extends Components.MiButton, HTMLStencilElement {}
+  var HTMLMiButtonElement: {
+    prototype: HTMLMiButtonElement;
+    new (): HTMLMiButtonElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'mi-button': HTMLMiButtonElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
+  interface MiButton extends JSXBase.HTMLAttributes<HTMLMiButtonElement> {
     /**
-    * The first name
+    * 按钮颜色，可选值见 colors
     */
-    'first'?: string;
+    'color'?: Color;
     /**
-    * The last name
+    * 是否禁用按钮
     */
-    'last'?: string;
+    'disabled'?: boolean;
     /**
-    * The middle name
+    * 将按钮宽度调整为其父宽度
     */
-    'middle'?: string;
+    'full'?: boolean;
+    /**
+    * 点击跳转的地址，指定此属性 button 的行为和 a 链接一致
+    */
+    'href'?: string;
+    /**
+    * 设置 button 原生的 type 值，可选值请参考 HTML 标准
+    */
+    'htmlType'?: string;
+    /**
+    * 设置按钮载入状态
+    */
+    'loading'?: boolean;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 设置按钮形状
+    */
+    'shape'?: 'circle' | 'round';
+    /**
+    * 设置按钮大小，可选值为 small large 或者不设
+    */
+    'size'?: Size;
+    /**
+    * a 链接的 target 属性，href 存在时生效
+    */
+    'target'?: string;
+    /**
+    * 按钮类型
+    */
+    'variant'?: BtnType;
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'mi-button': MiButton;
   }
 }
 

@@ -1,4 +1,3 @@
-$prefix = 'mi';
 // colors
 $primary:         #1890ff !default;
 $secondary:       #0cd1e8 !default;
@@ -6,9 +5,9 @@ $tertiary:        #7044ff !default;
 $success:         #10dc60 !default;
 $warning:         #ffce00 !default;
 $danger:          #f04141 !default;
-$light:           #f4f5f8 !default;
+$light:           #fff !default;
 $medium:          #989aa2 !default;
-$dark:            #222428 !default;
+$dark:            #000 !default;
 
 // Color map should provide
 // - base: main color to be used.
@@ -72,20 +71,36 @@ $colors:  (
   )
 ) !default;
 
+// The minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries
+$screen-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+) !default;
+
+
 $body-background:#fff;
 $component-background: #fff;
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
 'Segoe UI Emoji', 'Segoe UI Symbol';
 $code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+$font-variant-base:tabular-nums;
 $font-feature-settings-base:'tnum';
 $font-size-base: 14px;
 $font-size-lg: $font-size-base + 2px;
 $font-size-sm: 12px;
 $line-height-base: 1.5;
+$text-color:rgba(0,0,0,.65);
 $border-radius-base: 4px;
 $border-radius-sm: 2px;
 
+// head
+$heading-color: rgba(0,0,0,.85);;
 $heading-1-size: ceil($font-size-base * 2.71);
 $heading-2-size: ceil($font-size-base * 2.14);
 $heading-3-size: ceil($font-size-base * 1.71);
@@ -132,9 +147,9 @@ $background-color-light: hsl(0, 0, 98%); // background of header and selected it
 $background-color-base: hsl(0, 0, 96%); // Default grey background color
 
 // Disabled states
-$disabled-color: fade(#000, 25%);
+$disabled-color:rgba(0,0,0,.25);
 $disabled-bg: $background-color-base;
-$disabled-color-dark: fade(#fff, 35%);
+$disabled-color-dark: rgba(255,255,255,.25);
 
 // Shadow
 $shadow-color: rgba(0, 0, 0, 0.15);

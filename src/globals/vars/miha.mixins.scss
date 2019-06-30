@@ -40,7 +40,7 @@
 }
 
 @mixin square($size) {
-  .size($size, $size);
+  @include size($size, $size);
 }
 // mixins for clearfix
 // ------------------------
@@ -79,6 +79,25 @@
 @mixin font-smoothing() {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+}
+
+// Generates the color classes and variables based on the
+// colors map
+
+@mixin generate-color($color-name) {
+  $value: map-get($colors, $color-name);
+
+  $base: map-get($value, base);
+  $contrast: map-get($value, contrast);
+  $shade: map-get($value, shade);
+  $tint: map-get($value, tint);
+
+  --mi-color-base: var(--mi-color-#{$color-name}, #{$base}) !important;
+  --mi-color-base-rgb: var(--mi-color-#{$color-name}-rgb, #{color-to-rgb-list($base)}) !important;
+  --mi-color-contrast: var(--mi-color-#{$color-name}-contrast, #{$contrast}) !important;
+  --mi-color-contrast-rgb: var(--mi-color-#{$color-name}-contrast-rgb, #{color-to-rgb-list($contrast)}) !important;
+  --mi-color-shade: var(--mi-color-#{$color-name}-shade, #{$shade}) !important;
+  --mi-color-tint: var(--mi-color-#{$color-name}-tint, #{$tint}) !important;
 }
 
 // Get the key from a map based on the index

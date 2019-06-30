@@ -16,12 +16,14 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
+    "css.sass": "node-sass --output ./src/components/styles/ src/styles/index.scss --output-style compressed",
+    "start": "npm run css.sass&&stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "devDependencies": {
-    "@stencil/core": "^1.0.7"
+    "@stencil/core": "^1.0.7",
+    "@stencil/sass": "^1.0.1"
   },
   "license": "MIT"
 }

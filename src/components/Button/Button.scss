@@ -1,0 +1,147 @@
+@import "button.vars";
+:host {
+  /**
+   * @prop --background: Background of the button
+   * @prop --background-activated: Background of the button when activated
+   * @prop --background-focused: Background of the button when focused
+   * @prop --background-hover: Background of the button on hover
+   *
+   * @prop --color: Text color of the button
+   * @prop --color-activated: Text color of the button when activated
+   * @prop --color-focused: Text color of the button when focused
+   * @prop --color-hover: Text color of the button when hover
+
+   * @prop --transition: Transition of the button
+   * @prop --font-weight: bold of the button text
+
+   * @prop --btn-radius: Border radius of the button
+
+   * @prop --btn-shadow: Box shadow of the button
+   * @prop --opacity: Opacity of the button
+   *
+   * @prop --padding-top: Padding top of the button
+   * @prop --padding-end: Padding end of the button
+   * @prop --padding-bottom: Padding bottom of the button
+   * @prop --padding-start: Padding start of the button
+   */
+
+}
+
+:host(.mi-btn){
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-image: none;
+  opacity: var(--opacity,1);
+  border: 1px solid $border-color-base;
+  font-weight: var(--font-weight,$btn-font-weight);
+  box-shadow:var(--btn-shadow,$btn-shadow);
+  border-radius: var(--btn-radius,$border-radius-base);
+  background-color: var(--background-color,$light);
+  color:var(--color,$text-color);
+  padding: var(--padding-top,6px) var(--padding-end,$btn-padding) var(--padding-bottom,6px) var(--padding-start,$btn-padding);
+  cursor: pointer;
+  transition: var(--transition,all 0.3s $ease-in-out);
+  user-select: none;
+  touch-action: manipulation;
+  line-height: $line-height-base;
+  cursor: pointer;
+  a{
+    cursor: inherit;
+    color: inherit;
+    text-decoration: inherit;
+  }
+  &>button{
+    border: none;
+    padding: 0;
+    vertical-align: middle;
+    cursor: inherit;
+    color: inherit;
+    background: transparent;
+    &:focus{
+      outline: none;
+    }
+  }
+}
+
+:host(.mi-btn-dashed){
+  border:1px dashed $border-color-base;
+}
+:host(.mi-btn-text){
+  border:none;
+  background: transparent;
+}
+
+
+// colors
+@each $color,$value  in $colors {
+    // normal
+   :host(.mi-btn-fill.mi-color-#{$color}){
+      background-color:current-color(base);
+      color: var(--color-hover,$light);
+      border-color: current-color(base);
+    }
+    :host(.mi-btn-ghost){
+      background-color: transparent;
+      color: current-color(base);
+      border-color: currentColor;
+    }
+    // hover
+    :host(.mi-btn-text.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+      color: var(--color-hover,current-color(base));
+    }
+    :host(.mi-btn-ghost.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+      color: current-color(shade);
+    }
+    :host(.mi-btn-dashed.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover),
+    :host(.mi-btn-default.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+      color: var(--color-hover,current-color(base));
+      border-color: currentColor;
+    }
+    :host(.mi-btn-fill.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+      background-color: current-color(shade);
+      color: var(--color-h,$light);
+      border-color: current-color(shade);
+    }
+
+}
+// disabled
+:host(.mi-btn-disabled){
+  color: $disabled-color !important;
+  border-color: currentColor !important;
+}
+:host(.mi-btn-disabled:not(.mi-btn-text)){
+  background-color: $disabled-bg !important;
+}
+
+// full
+:host(.mi-btn-full){
+  width: 100%;
+}
+
+//size
+:host(.mi-btn-small) {
+  &>button{
+    font-size: $font-size-sm;
+  }
+  padding: 4px 13px 4px
+}
+:host(.mi-btn-large) {
+  &>button{
+    font-size: $font-size-lg;
+  }
+  padding: 8px 17px 8px
+}
+
+// shape
+:host(.mi-btn-round) {
+   border-radius: 60px;
+}
+:host(.mi-btn-circle) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

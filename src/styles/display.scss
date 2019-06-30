@@ -1,0 +1,26 @@
+@import "../globals/vars/index";
+[hidden] {
+  display: none !important;
+}
+
+// break-points
+// Adds hidden attributes
+@each $breakpoint in map-keys($screen-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $screen-breakpoints);
+
+  @include media-breakpoint-up($breakpoint, $screen-breakpoints) {
+    // Provide `mi-hide-{bp}-up` classes for hiding the element based
+    // on the breakpoint
+    .mi-hide#{$infix}-up {
+      display: none !important;
+    }
+  }
+
+  @include media-breakpoint-down($breakpoint, $screen-breakpoints) {
+    // Provide `mi-hide-{bp}-down` classes for hiding the element based
+    // on the breakpoint
+    .mi-hide#{$infix}-down {
+      display: none !important;
+    }
+  }
+}
