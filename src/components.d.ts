@@ -9,7 +9,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   BtnType,
   Color,
+  IconTheme,
   Size,
+  TypographyTheme,
 } from './interface';
 
 export namespace Components {
@@ -59,6 +61,60 @@ export namespace Components {
     */
     'variant': BtnType;
   }
+  interface MiIcon {
+    /**
+    * Icon 名，支持远程svg icon和自定义svg dom
+    */
+    'icon': string | HTMLElement;
+    /**
+    * 是否图标进入即将可视化区域后加载
+    */
+    'lazy': boolean;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 设置图标的旋转动画
+    */
+    'spinner': boolean;
+    /**
+    * 设置图标的类型
+    */
+    'theme': IconTheme;
+  }
+  interface MiTypography {
+    /**
+    * 排版文字的交互行为
+    */
+    'action': 'copyable' | 'editable';
+    /**
+    * 禁用文本
+    */
+    'disabled': boolean;
+    /**
+    * 自动溢出省略
+    */
+    'ellipsis': boolean | Ellipsis;
+    /**
+    * 排版标题的级别
+    */
+    'lv': number;
+    /**
+    * 排版文字的主题
+    */
+    'theme': TypographyTheme;
+  }
+  interface RippleEffect {
+    /**
+    * Adds the ripple effect to the parent element.
+    */
+    'addRipple': (x: number, y: number) => Promise<() => void>;
+    /**
+    * Sets the type of ripple-effect:  - `bounded`: the ripple effect expands from the user's click position - `unbounded`: the ripple effect expands from the center of the button and overflows the container.  NOTE: Surfaces for bounded ripples should have the overflow property set to hidden, while surfaces for unbounded ripples should have it set to visible.
+    */
+    'type': 'bounded' | 'unbounded';
+  }
 }
 
 declare global {
@@ -69,8 +125,29 @@ declare global {
     prototype: HTMLMiButtonElement;
     new (): HTMLMiButtonElement;
   };
+
+  interface HTMLMiIconElement extends Components.MiIcon, HTMLStencilElement {}
+  var HTMLMiIconElement: {
+    prototype: HTMLMiIconElement;
+    new (): HTMLMiIconElement;
+  };
+
+  interface HTMLMiTypographyElement extends Components.MiTypography, HTMLStencilElement {}
+  var HTMLMiTypographyElement: {
+    prototype: HTMLMiTypographyElement;
+    new (): HTMLMiTypographyElement;
+  };
+
+  interface HTMLRippleEffectElement extends Components.RippleEffect, HTMLStencilElement {}
+  var HTMLRippleEffectElement: {
+    prototype: HTMLRippleEffectElement;
+    new (): HTMLRippleEffectElement;
+  };
   interface HTMLElementTagNameMap {
     'mi-button': HTMLMiButtonElement;
+    'mi-icon': HTMLMiIconElement;
+    'mi-typography': HTMLMiTypographyElement;
+    'ripple-effect': HTMLRippleEffectElement;
   }
 }
 
@@ -121,9 +198,62 @@ declare namespace LocalJSX {
     */
     'variant'?: BtnType;
   }
+  interface MiIcon extends JSXBase.HTMLAttributes<HTMLMiIconElement> {
+    /**
+    * Icon 名，支持远程svg icon和自定义svg dom
+    */
+    'icon'?: string | HTMLElement;
+    /**
+    * 是否图标进入即将可视化区域后加载
+    */
+    'lazy'?: boolean;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 设置图标的旋转动画
+    */
+    'spinner'?: boolean;
+    /**
+    * 设置图标的类型
+    */
+    'theme'?: IconTheme;
+  }
+  interface MiTypography extends JSXBase.HTMLAttributes<HTMLMiTypographyElement> {
+    /**
+    * 排版文字的交互行为
+    */
+    'action'?: 'copyable' | 'editable';
+    /**
+    * 禁用文本
+    */
+    'disabled'?: boolean;
+    /**
+    * 自动溢出省略
+    */
+    'ellipsis'?: boolean | Ellipsis;
+    /**
+    * 排版标题的级别
+    */
+    'lv'?: number;
+    /**
+    * 排版文字的主题
+    */
+    'theme'?: TypographyTheme;
+  }
+  interface RippleEffect extends JSXBase.HTMLAttributes<HTMLRippleEffectElement> {
+    /**
+    * Sets the type of ripple-effect:  - `bounded`: the ripple effect expands from the user's click position - `unbounded`: the ripple effect expands from the center of the button and overflows the container.  NOTE: Surfaces for bounded ripples should have the overflow property set to hidden, while surfaces for unbounded ripples should have it set to visible.
+    */
+    'type'?: 'bounded' | 'unbounded';
+  }
 
   interface IntrinsicElements {
     'mi-button': MiButton;
+    'mi-icon': MiIcon;
+    'mi-typography': MiTypography;
+    'ripple-effect': RippleEffect;
   }
 }
 

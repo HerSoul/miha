@@ -1,11 +1,4 @@
 import { EventEmitter } from '@stencil/core';
-export function format(first: string, middle: string, last: string): string {
-  return (
-    (first || '') +
-    (middle ? ` ${middle}` : '') +
-    (last ? ` ${last}` : '')
-  );
-}
 export function rIC(callback: () => void) {
   if ('requestIdleCallback' in window) {
     (window as any).requestIdleCallback(callback);
@@ -34,6 +27,21 @@ export function now(ev: UIEvent) {
   return ev.timeStamp || Date.now();
 }
 
+export function pointerCoord(ev: any): {x: number, y: number} {
+  // get X coordinates for either a mouse click
+  // or a touch depending on the given event
+  if (ev) {
+    const changedTouches = ev.changedTouches;
+    if (changedTouches && changedTouches.length > 0) {
+      const touch = changedTouches[0];
+      return { x: touch.clientX, y: touch.clientY };
+    }
+    if (ev.pageX !== undefined) {
+      return { x: ev.pageX, y: ev.pageY };
+    }
+  }
+  return { x: 0, y: 0 };
+}
 
 export function debounceEvent(event: EventEmitter, wait: number): EventEmitter {
   const original = (event as any)._original || event;
@@ -51,3 +59,6 @@ export function debounce(func: (...args: any[]) => void, wait = 0) {
   };
 }
 
+export function includeHttp(str:string):boolean {
+  return str.includes('http');
+}

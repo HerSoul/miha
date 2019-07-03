@@ -99,6 +99,7 @@ export class MiButton {
         {...props}
         class={{
            'mi-btn':true,
+           'activatable':!disabled&&!loading,
            'mi-btn-disabled':disabled,
            'mi-btn-inloading':loading,
            [`mi-btn-${size}`]:!!size,
@@ -108,12 +109,14 @@ export class MiButton {
            [`mi-btn-full`]:!!full,
         }}
       >
+        <div class="loading-overlayer"></div>
+        <ripple-effect></ripple-effect>
         <slot name="start"></slot>
         {
          href ?
            <button type={htmlType}>
              <a href={href} target={target}>
-             <slot></slot>
+             <span><slot></slot></span>
              </a>
            </button>
        :<button type={htmlType}>

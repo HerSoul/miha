@@ -15,11 +15,6 @@ export const config: Config = {
     },
     {
       type: 'docs-readme'
-    },
-    {
-      type: 'www',
-      copy:[{ src: '**/*.html' },{ src: '**/*.css' }],
-      serviceWorker: null // disable service workers
     }
   ]
 };

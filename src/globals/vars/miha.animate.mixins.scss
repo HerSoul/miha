@@ -1,0 +1,11 @@
+@mixin rotate($startDeg,$endDeg,$duration:$animation-duration-base,$b:linear,$infinite:infinite){
+  @keyframes rotate {
+    0% {
+      transform: rotate($startDeg);
+    }
+    100% {
+      transform: rotate($endDeg);
+    }
+  };
+  animation: rotate $duration $b $infinite;
+}

@@ -29,12 +29,12 @@
 
 :host(.mi-btn){
   position: relative;
-  display: inline-block;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  vertical-align: middle;
   background-image: none;
+  font-size: $font-size-base;
   opacity: var(--opacity,1);
   border: 1px solid $border-color-base;
   font-weight: var(--font-weight,$btn-font-weight);
@@ -42,24 +42,43 @@
   border-radius: var(--btn-radius,$border-radius-base);
   background-color: var(--background-color,$light);
   color:var(--color,$text-color);
-  padding: var(--padding-top,6px) var(--padding-end,$btn-padding) var(--padding-bottom,6px) var(--padding-start,$btn-padding);
+  padding: var(--padding-top,0) var(--padding-end,$btn-padding) var(--padding-bottom,0) var(--padding-start,$btn-padding);
   cursor: pointer;
   transition: var(--transition,all 0.3s $ease-in-out);
   user-select: none;
   touch-action: manipulation;
   line-height: $line-height-base;
+  height: 32px;
   cursor: pointer;
   a{
     cursor: inherit;
     color: inherit;
     text-decoration: inherit;
   }
+  &>.loading-overlayer{
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: 1;
+    display: none;
+    background: #fff;
+    border-radius: inherit;
+    opacity: .35;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+    content: '';
+    pointer-events: none;
+  }
   &>button{
     border: none;
     padding: 0;
     vertical-align: middle;
     cursor: inherit;
+    line-height: 1;
     color: inherit;
+    font-size: inherit;
     background: transparent;
     &:focus{
       outline: none;
@@ -82,7 +101,7 @@
    :host(.mi-btn-fill.mi-color-#{$color}){
       background-color:current-color(base);
       color: var(--color-hover,$light);
-      border-color: current-color(base);
+      border: none !important;
     }
     :host(.mi-btn-ghost){
       background-color: transparent;
@@ -90,31 +109,44 @@
       border-color: currentColor;
     }
     // hover
-    :host(.mi-btn-text.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+    :host(.mi-btn-text.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-inloading):hover){
       color: var(--color-hover,current-color(base));
     }
-    :host(.mi-btn-ghost.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+    :host(.mi-btn-ghost.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-inloading):hover){
       color: current-color(shade);
     }
-    :host(.mi-btn-dashed.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover),
-    :host(.mi-btn-default.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+    :host(.mi-btn-dashed.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-inloading):hover),
+    :host(.mi-btn-default.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-inloading):hover){
       color: var(--color-hover,current-color(base));
       border-color: currentColor;
     }
-    :host(.mi-btn-fill.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-loading):hover){
+    :host(.mi-btn-fill.mi-color-#{$color}:not(.mi-btn-disabled):not(.mi-btn-inloading):hover){
       background-color: current-color(shade);
       color: var(--color-h,$light);
-      border-color: current-color(shade);
     }
 
 }
 // disabled
 :host(.mi-btn-disabled){
+  cursor: not-allowed;
   color: $disabled-color !important;
   border-color: currentColor !important;
 }
 :host(.mi-btn-disabled:not(.mi-btn-text)){
   background-color: $disabled-bg !important;
+}
+::slotted(*){
+  color: inherit;
+  font-size: inherit;
+}
+::slotted([slot=start]){
+   margin-right: 8px;
+}
+::slotted([slot=end]){
+  margin-left: 8px;
+}
+::slotted(mi-icon){
+  font-size: 18px;
 }
 
 // full
@@ -127,21 +159,58 @@
   &>button{
     font-size: $font-size-sm;
   }
-  padding: 4px 13px 4px
+  ::slotted(mi-icon){
+    font-size: 16px;
+  }
+  padding: 0px 13px 0px
 }
 :host(.mi-btn-large) {
   &>button{
     font-size: $font-size-lg;
   }
-  padding: 8px 17px 8px
+  ::slotted(mi-icon){
+    font-size: 20px;
+  }
+  padding: 0px 17px 0px
 }
 
 // shape
 :host(.mi-btn-round) {
    border-radius: 60px;
+   & ripple-effect{
+    border-radius: 60px;
+   }
 }
 :host(.mi-btn-circle) {
   width: 40px;
   height: 40px;
+  padding: 0;
   border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  & button {
+    display:inherit;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  & ripple-effect{
+    border-radius: 50%;
+  }
+}
+:host(.mi-btn-circle.mi-btn-small){
+  width: 36px;
+  height: 36px;
+}
+:host(.mi-btn-circle.mi-btn-large){
+  width: 44px;
+  height: 44px;
+}
+
+// loading
+:host(.mi-btn-inloading){
+  cursor: initial;
+  &>.loading-overlayer{
+    display: block;
+  }
 }

@@ -1,0 +1,8 @@
+@import "typography.var";
+:host(.mi-typography){
+  @each $key,$value,$index in $titles{
+    .typography-title-#{$index}{
+      @include typography-title($key,$value)
+    }
+  }
+}

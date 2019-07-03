@@ -1,0 +1,24 @@
+$titles: heading-1-size 1.23 1,
+  heading-2-size 1.35 2,
+  heading-3-size 1.35 3,
+  heading-4-size 1.4 4;
+
+@mixin typography-title($fontSize, $lineHeight) {
+  margin-bottom: 0.5em;
+  color: $heading-color;
+  font-weight: 600;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+}
+//.typography-title-1() {
+//   @include typography-title($heading-1-size, 1.23);
+//}
+//.typography-title-2() {
+//.typography-title(@heading-2-size, 1.35);
+//}
+//.typography-title-3() {
+//.typography-title(@heading-3-size, 1.35);
+//}
+//.typography-title-4() {
+//.typography-title(@heading-4-size, 1.4);
+//}

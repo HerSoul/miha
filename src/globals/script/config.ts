@@ -8,9 +8,19 @@ export interface Config {
    */
   prefix?: string;
   /**
+   effeft
+   */
+  rippleEffect?: boolean;
+  /**
    版本号
    */
-  version: number;
+  version?: number;
+  /**
+   spinerIcon
+   */
+  spinerIcon?: string;
+
+  getBoolean?:(config:Config,key:string)=>boolean;
 
 }
 
