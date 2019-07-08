@@ -19,7 +19,7 @@
 | `shape`    | `shape`     | 设置按钮形状                              | `"circle" \| "round"`                                                                                           | `undefined` |
 | `size`     | `size`      | 设置按钮大小，可选值为 small large 或者不设        | `"large" \| "normal" \| "small"`                                                                                | `'normal'`  |
 | `target`   | `target`    | a 链接的 target 属性，href 存在时生效          | `string`                                                                                                        | `undefined` |
-| `variant`  | `variant`   | 按钮类型                                | `"dashed" \| "default" \| "ghost" \| "text"`                                                                    | `'default'` |
+| `variant`  | `variant`   | 按钮类型                                | `"dashed" \| "default" \| "fill" \| "ghost" \| "text"`                                                          | `'default'` |
 
 
 ## Slots
@@ -30,6 +30,42 @@
 | `"end"`   | 结束端内容插槽     |
 | `"start"` | 开始端内容插槽     |
 
+
+## CSS Custom Properties
+
+| Name                     | Description                             |
+| ------------------------ | --------------------------------------- |
+| `--background`           | Background of the button                |
+| `--background-activated` | Background of the button when activated |
+| `--background-focused`   | Background of the button when focused   |
+| `--background-hover`     | Background of the button on hover       |
+| `--btn-radius`           | Border radius of the button             |
+| `--btn-shadow`           | Box shadow of the button                |
+| `--color`                | Text color of the button                |
+| `--color-activated`      | Text color of the button when activated |
+| `--color-focused`        | Text color of the button when focused   |
+| `--color-hover`          | Text color of the button when hover     |
+| `--font-weight`          | bold of the button text.html            |
+| `--opacity`              | Opacity of the button                   |
+| `--padding-bottom`       | Padding bottom of the button            |
+| `--padding-end`          | Padding end of the button               |
+| `--padding-start`        | Padding start of the button             |
+| `--padding-top`          | Padding top of the button               |
+| `--transition`           | Transition of the button                |
+
+
+## Dependencies
+
+### Depends on
+
+- [ripple-effect](../ripple-effect)
+
+### Graph
+```mermaid
+graph TD;
+  mi-button --> ripple-effect
+  style mi-button fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

@@ -37,19 +37,25 @@ The ripple effect component adds the [Material Design ink ripple interaction eff
 
 Adds the ripple effect to the parent element.
 
-#### Parameters
-
-| Name | Type     | Description                                                 |
-| ---- | -------- | ----------------------------------------------------------- |
-| `x`  | `number` | The horizontal coordinate of where the ripple should start. |
-| `y`  | `number` | The vertical coordinate of where the ripple should start.   |
-
 #### Returns
 
 Type: `Promise<() => void>`
 
 
 
+
+## Dependencies
+
+### Used by
+
+ - [mi-button](../Button)
+
+### Graph
+```mermaid
+graph TD;
+  mi-button --> ripple-effect
+  style ripple-effect fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 
