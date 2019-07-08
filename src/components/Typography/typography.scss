@@ -1,8 +1,82 @@
 @import "typography.var";
-:host(.mi-typography){
-  @each $key,$value,$index in $titles{
-    .typography-title-#{$index}{
-      @include typography-title($key,$value)
-    }
+
+/**
+  * @prop --color: Text color of the typography
+*/
+
+:host(.mi-typography) {
+  color: var(--color, $text-color);
+  h1, h2, h3, h4 {
+    margin: 0;
+  }
+  p {
+    margin: 0 0 1em 0;
+  }
+  code {
+    margin: 0 0.2em;
+    padding: 0.2em 0.4em 0.1em;
+    font-size: 85%;
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+  }
+
+  mark {
+    padding: 0;
+    background-color: mi-color(warning, tint);
+  }
+
+  u,
+  ins {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+  }
+
+  s,
+  del {
+    text-decoration: line-through;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+  //  ============ Disabled ============
+  &[disabled] {
+    color: $disabled-color;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 }
+
+// ============ Ellipsis ============
+:host(.ellipsis-single-line) span{
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+
+ }
+:host(.ellipsis-multiple-line) {
+  p {
+    position: relative;
+  }
+  span {
+    display: -webkit-box;
+    /*! autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    vertical-align: baseline;
+    padding-right: 22px;
+  }
+  .mi-typography-expend {
+    position: absolute;
+    color: $primary;
+    right: 0;
+    bottom: 0;
+  }
+}
+@each $key, $value, $index in $titles {
+  :host(.typography-title#{$index}) h#{$index} {
+    @include typography-title($key, $value);
+  }
+}
+

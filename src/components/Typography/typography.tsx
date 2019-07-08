@@ -1,24 +1,11 @@
-import {Component, ComponentInterface, h, Host, Listen, Prop} from '@stencil/core';
-import { TypographyTheme } from '../../interface'
-interface Ellipsis {
-  row:number,
-  expaned:boolean
-}
+import {Component, ComponentInterface, Listen, Prop} from '@stencil/core';
+
 @Component({
   tag: 'mi-typography',
   styleUrl: 'typography.scss',
   shadow: true
 })
 export class Typography implements ComponentInterface {
-  /**
-   *  排版文字的主题
-   */
-  @Prop() theme:TypographyTheme ;
-
-  /**
-   * 自动溢出省略
-   */
-  @Prop() ellipsis: boolean | Ellipsis;
 
   /**
    * 用户提交编辑内容时触发
@@ -39,21 +26,17 @@ export class Typography implements ComponentInterface {
   @Prop() disabled: boolean = false;
 
   /**
-   * 排版标题的级别
+   * 其他属性,如aria-无障碍属性等
    */
-  @Prop() lv: number;
+  @Prop() props: {[prop: string]: any} ;
+
+
 
   render(){
-    return (
-      <Host class={{
-        "mi-typography":true
-      }}>
+    return {
 
-      </Host>
-    )
+    }
   }
-
-
 
 
 

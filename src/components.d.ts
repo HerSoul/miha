@@ -9,6 +9,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   BtnType,
   Color,
+  Ellipsis,
   IconTheme,
   Size,
   TypographyTheme,
@@ -83,6 +84,37 @@ export namespace Components {
     */
     'theme': IconTheme;
   }
+  interface MiParagraph {
+    /**
+    * 自动溢出省略
+    */
+    'ellipsis': boolean | Ellipsis;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    'toggleExpand': () => Promise<void>;
+  }
+  interface MiText {
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 排版文字的主题
+    */
+    'theme': TypographyTheme;
+  }
+  interface MiTitle {
+    /**
+    * 排版标题的级别
+    */
+    'lv': number;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+  }
   interface MiTypography {
     /**
     * 排版文字的交互行为
@@ -93,17 +125,19 @@ export namespace Components {
     */
     'disabled': boolean;
     /**
-    * 自动溢出省略
+    * 其他属性,如aria-无障碍属性等
     */
-    'ellipsis': boolean | Ellipsis;
+    'props': {[prop: string]: any};
+  }
+  interface ResizeObserver {
     /**
-    * 排版标题的级别
+    * 是否禁用
     */
-    'lv': number;
+    'disabled': boolean;
     /**
-    * 排版文字的主题
+    * 重新计算元素宽高的回调
     */
-    'theme': TypographyTheme;
+    'onResize': Function;
   }
   interface RippleEffect {
     /**
@@ -132,10 +166,34 @@ declare global {
     new (): HTMLMiIconElement;
   };
 
+  interface HTMLMiParagraphElement extends Components.MiParagraph, HTMLStencilElement {}
+  var HTMLMiParagraphElement: {
+    prototype: HTMLMiParagraphElement;
+    new (): HTMLMiParagraphElement;
+  };
+
+  interface HTMLMiTextElement extends Components.MiText, HTMLStencilElement {}
+  var HTMLMiTextElement: {
+    prototype: HTMLMiTextElement;
+    new (): HTMLMiTextElement;
+  };
+
+  interface HTMLMiTitleElement extends Components.MiTitle, HTMLStencilElement {}
+  var HTMLMiTitleElement: {
+    prototype: HTMLMiTitleElement;
+    new (): HTMLMiTitleElement;
+  };
+
   interface HTMLMiTypographyElement extends Components.MiTypography, HTMLStencilElement {}
   var HTMLMiTypographyElement: {
     prototype: HTMLMiTypographyElement;
     new (): HTMLMiTypographyElement;
+  };
+
+  interface HTMLResizeObserverElement extends Components.ResizeObserver, HTMLStencilElement {}
+  var HTMLResizeObserverElement: {
+    prototype: HTMLResizeObserverElement;
+    new (): HTMLResizeObserverElement;
   };
 
   interface HTMLRippleEffectElement extends Components.RippleEffect, HTMLStencilElement {}
@@ -146,7 +204,11 @@ declare global {
   interface HTMLElementTagNameMap {
     'mi-button': HTMLMiButtonElement;
     'mi-icon': HTMLMiIconElement;
+    'mi-paragraph': HTMLMiParagraphElement;
+    'mi-text': HTMLMiTextElement;
+    'mi-title': HTMLMiTitleElement;
     'mi-typography': HTMLMiTypographyElement;
+    'resize-observer': HTMLResizeObserverElement;
     'ripple-effect': HTMLRippleEffectElement;
   }
 }
@@ -220,6 +282,36 @@ declare namespace LocalJSX {
     */
     'theme'?: IconTheme;
   }
+  interface MiParagraph extends JSXBase.HTMLAttributes<HTMLMiParagraphElement> {
+    /**
+    * 自动溢出省略
+    */
+    'ellipsis'?: boolean | Ellipsis;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+  }
+  interface MiText extends JSXBase.HTMLAttributes<HTMLMiTextElement> {
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 排版文字的主题
+    */
+    'theme'?: TypographyTheme;
+  }
+  interface MiTitle extends JSXBase.HTMLAttributes<HTMLMiTitleElement> {
+    /**
+    * 排版标题的级别
+    */
+    'lv'?: number;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+  }
   interface MiTypography extends JSXBase.HTMLAttributes<HTMLMiTypographyElement> {
     /**
     * 排版文字的交互行为
@@ -230,17 +322,19 @@ declare namespace LocalJSX {
     */
     'disabled'?: boolean;
     /**
-    * 自动溢出省略
+    * 其他属性,如aria-无障碍属性等
     */
-    'ellipsis'?: boolean | Ellipsis;
+    'props'?: {[prop: string]: any};
+  }
+  interface ResizeObserver extends JSXBase.HTMLAttributes<HTMLResizeObserverElement> {
     /**
-    * 排版标题的级别
+    * 是否禁用
     */
-    'lv'?: number;
+    'disabled'?: boolean;
     /**
-    * 排版文字的主题
+    * 重新计算元素宽高的回调
     */
-    'theme'?: TypographyTheme;
+    'onResize'?: Function;
   }
   interface RippleEffect extends JSXBase.HTMLAttributes<HTMLRippleEffectElement> {
     /**
@@ -252,7 +346,11 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'mi-button': MiButton;
     'mi-icon': MiIcon;
+    'mi-paragraph': MiParagraph;
+    'mi-text': MiText;
+    'mi-title': MiTitle;
     'mi-typography': MiTypography;
+    'resize-observer': ResizeObserver;
     'ripple-effect': RippleEffect;
   }
 }

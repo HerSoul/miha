@@ -25,5 +25,8 @@
     "@stencil/core": "^1.0.7",
     "@stencil/sass": "^1.0.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "resize-observer-polyfill": "^1.5.1"
+  }
 }

@@ -52,3 +52,23 @@ export function getClassMap(classes: string | string[] | undefined): CssClassMap
   getClassList(classes).forEach(c => map[c] = true);
   return map;
 }
+
+export function addStyles(el:any,styles:object,sub?:string) {
+      var dom:HTMLElement = el;
+      if(sub){
+        dom =  el.querySelector(sub);
+      };
+      Object.entries(styles).map(style=>{
+        dom.style[style[0]] = style[1];
+      })
+}
+
+export function isStyleSupport(styleName: string | Array<string>): boolean {
+  if (typeof window !== 'undefined' && window.document && window.document.documentElement) {
+    const styleNameList = Array.isArray(styleName) ? styleName : [styleName];
+    const { documentElement } = window.document;
+
+    return styleNameList.some(name => name in documentElement.style);
+  }
+  return false;
+}

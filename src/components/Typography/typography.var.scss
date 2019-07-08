@@ -1,9 +1,11 @@
-$titles: heading-1-size 1.23 1,
-  heading-2-size 1.35 2,
-  heading-3-size 1.35 3,
-  heading-4-size 1.4 4;
+$titles: $heading-1-size 1.23 1,
+  $heading-2-size 1.35 2,
+  $heading-3-size 1.35 3,
+  $heading-4-size 1.4 4;
 
 @mixin typography-title($fontSize, $lineHeight) {
+  display: block;
+  margin-top: 0;
   margin-bottom: 0.5em;
   color: $heading-color;
   font-weight: 600;
