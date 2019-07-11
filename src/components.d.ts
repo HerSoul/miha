@@ -8,8 +8,10 @@
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   BtnType,
+  ColAttrs,
   Color,
   Ellipsis,
+  Gutter,
   IconTheme,
   Size,
   TypographyTheme,
@@ -62,6 +64,38 @@ export namespace Components {
     */
     'variant': BtnType;
   }
+  interface MiCol {
+    'getAttrs': () => Promise<void>;
+    /**
+    * 栅格左侧的间隔格数，间隔内不可以有栅格
+    */
+    'offset': number;
+    /**
+    * 栅格顺序，flex 布局模式下有效
+    */
+    'order': string;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 栅格向左移动格数
+    */
+    'pull': number;
+    /**
+    * 栅格向右移动格数
+    */
+    'push': number;
+    'resize': () => Promise<void>;
+    /**
+    * 响应式栅格，可为栅格数或一个包含其他属性的对象
+    */
+    'response': ColAttrs;
+    /**
+    * 栅格占位格数，为 0 时相当于 display: none
+    */
+    'span': number;
+  }
   interface MiIcon {
     /**
     * Icon 名，支持远程svg icon和自定义svg dom
@@ -94,6 +128,19 @@ export namespace Components {
     */
     'props': {[prop: string]: any};
     'toggleExpand': () => Promise<void>;
+  }
+  interface MiRow {
+    'getGutter': () => Promise<void>;
+    /**
+    * 栅格间隔，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}
+    */
+    'gutter': number | Gutter;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    'renderChildNode': () => Promise<void>;
+    'resize': () => Promise<void>;
   }
   interface MiText {
     /**
@@ -137,7 +184,7 @@ export namespace Components {
     /**
     * 重新计算元素宽高的回调
     */
-    'onResize': Function;
+    'resize': Function;
   }
   interface RippleEffect {
     /**
@@ -160,6 +207,12 @@ declare global {
     new (): HTMLMiButtonElement;
   };
 
+  interface HTMLMiColElement extends Components.MiCol, HTMLStencilElement {}
+  var HTMLMiColElement: {
+    prototype: HTMLMiColElement;
+    new (): HTMLMiColElement;
+  };
+
   interface HTMLMiIconElement extends Components.MiIcon, HTMLStencilElement {}
   var HTMLMiIconElement: {
     prototype: HTMLMiIconElement;
@@ -170,6 +223,12 @@ declare global {
   var HTMLMiParagraphElement: {
     prototype: HTMLMiParagraphElement;
     new (): HTMLMiParagraphElement;
+  };
+
+  interface HTMLMiRowElement extends Components.MiRow, HTMLStencilElement {}
+  var HTMLMiRowElement: {
+    prototype: HTMLMiRowElement;
+    new (): HTMLMiRowElement;
   };
 
   interface HTMLMiTextElement extends Components.MiText, HTMLStencilElement {}
@@ -203,8 +262,10 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'mi-button': HTMLMiButtonElement;
+    'mi-col': HTMLMiColElement;
     'mi-icon': HTMLMiIconElement;
     'mi-paragraph': HTMLMiParagraphElement;
+    'mi-row': HTMLMiRowElement;
     'mi-text': HTMLMiTextElement;
     'mi-title': HTMLMiTitleElement;
     'mi-typography': HTMLMiTypographyElement;
@@ -260,6 +321,36 @@ declare namespace LocalJSX {
     */
     'variant'?: BtnType;
   }
+  interface MiCol extends JSXBase.HTMLAttributes<HTMLMiColElement> {
+    /**
+    * 栅格左侧的间隔格数，间隔内不可以有栅格
+    */
+    'offset'?: number;
+    /**
+    * 栅格顺序，flex 布局模式下有效
+    */
+    'order'?: string;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 栅格向左移动格数
+    */
+    'pull'?: number;
+    /**
+    * 栅格向右移动格数
+    */
+    'push'?: number;
+    /**
+    * 响应式栅格，可为栅格数或一个包含其他属性的对象
+    */
+    'response'?: ColAttrs;
+    /**
+    * 栅格占位格数，为 0 时相当于 display: none
+    */
+    'span'?: number;
+  }
   interface MiIcon extends JSXBase.HTMLAttributes<HTMLMiIconElement> {
     /**
     * Icon 名，支持远程svg icon和自定义svg dom
@@ -287,6 +378,16 @@ declare namespace LocalJSX {
     * 自动溢出省略
     */
     'ellipsis'?: boolean | Ellipsis;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+  }
+  interface MiRow extends JSXBase.HTMLAttributes<HTMLMiRowElement> {
+    /**
+    * 栅格间隔，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}
+    */
+    'gutter'?: number | Gutter;
     /**
     * 其他属性,如aria-无障碍属性等
     */
@@ -334,7 +435,7 @@ declare namespace LocalJSX {
     /**
     * 重新计算元素宽高的回调
     */
-    'onResize'?: Function;
+    'resize'?: Function;
   }
   interface RippleEffect extends JSXBase.HTMLAttributes<HTMLRippleEffectElement> {
     /**
@@ -345,8 +446,10 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'mi-button': MiButton;
+    'mi-col': MiCol;
     'mi-icon': MiIcon;
     'mi-paragraph': MiParagraph;
+    'mi-row': MiRow;
     'mi-text': MiText;
     'mi-title': MiTitle;
     'mi-typography': MiTypography;

@@ -8,6 +8,7 @@ export const config: Config = {
   })],
   copy: [{ src: '**/*.scss' }],
   enableCache:false,
+  preamble:"web components",
   outputTargets: [
     {
       type: 'dist',

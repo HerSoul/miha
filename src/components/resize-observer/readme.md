@@ -31,8 +31,25 @@
 | Property   | Attribute  | Description | Type       | Default     |
 | ---------- | ---------- | ----------- | ---------- | ----------- |
 | `disabled` | `disabled` | 是否禁用        | `boolean`  | `false`     |
-| `onResize` | --         | 重新计算元素宽高的回调 | `Function` | `undefined` |
+| `resize`   | --         | 重新计算元素宽高的回调 | `Function` | `undefined` |
 
+
+## Dependencies
+
+### Used by
+
+ - [mi-col](../Grid/Col)
+ - [mi-paragraph](../Typography/Paragraph)
+ - [mi-row](../Grid/Row)
+
+### Graph
+```mermaid
+graph TD;
+  mi-col --> resize-observer
+  mi-paragraph --> resize-observer
+  mi-row --> resize-observer
+  style resize-observer fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

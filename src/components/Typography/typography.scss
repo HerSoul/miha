@@ -40,12 +40,14 @@
   strong {
     font-weight: 600;
   }
-  //  ============ Disabled ============
-  &[disabled] {
-    color: $disabled-color;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
+
+}
+
+//  ============ Disabled ============
+:host([disabled]){
+  color: $disabled-color;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 // ============ Ellipsis ============
@@ -65,7 +67,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     vertical-align: baseline;
-    padding-right: 22px;
   }
   .mi-typography-expend {
     position: absolute;

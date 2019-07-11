@@ -1,7 +1,7 @@
 
 import ResizeObserverClass from 'resize-observer-polyfill';
 import {Component, ComponentInterface, Prop, h, Element,Host,Watch} from '@stencil/core';
-
+import { debounceRaf } from '../../utils/utils'
 @Component({
   tag: 'resize-observer'
 })
@@ -18,7 +18,7 @@ export class ResizeObserver  implements ComponentInterface {
   /**
    *  重新计算元素宽高的回调
    */
-  @Prop() onResize : Function;
+  @Prop() resize : Function;
 
   componentDidLoad() {
     this.onComponentUpdated()
@@ -44,9 +44,9 @@ export class ResizeObserver  implements ComponentInterface {
     }
    }
    _onResize = () => {
-    const { onResize } = this;
-    if (onResize) {
-      onResize();
+    const { resize } = this;
+    if (resize) {
+      debounceRaf(resize)
     }
   };
 

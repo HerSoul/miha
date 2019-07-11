@@ -6,7 +6,7 @@ import { getSvgIcon  ,getSvgTel } from './getSvgContent'
   tag: 'mi-icon',
   styleUrl: 'Icon.scss',
 })
-export class MiButton {
+export class MiIcom {
   @Prop({ context: 'window' }) win!: Window;
 
   @State() content:HTMLElement | string;

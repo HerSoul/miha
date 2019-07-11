@@ -1,0 +1,9 @@
+.mi-row{
+  .el-row:not(:last-child) {
+    margin-right: 8px;
+  }
+  width: 100%;
+  box-sizing: border-box;
+  @include clearfix();
+}
+

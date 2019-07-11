@@ -1,0 +1,23 @@
+.mi-col {
+  position: relative;
+  flex: 0 0 auto;
+  float: left;
+  box-sizing:border-box;
+}
+$index : $TOALL_COLS;
+@while $index > 0 {
+  .mi-col-span-#{$index}{
+    width: percentage($index / $TOALL_COLS);
+  }
+  .mi-col-offset-#{$index}{
+    margin-left: percentage($index / $TOALL_COLS);
+  }
+  .mi-col-pull-#{$index}{
+    left: percentage($index / $TOALL_COLS);
+  }
+  .mi-col-push-#{$index}{
+    right:percentage($index / $TOALL_COLS);
+  }
+  $index: $index - 1;
+}
+

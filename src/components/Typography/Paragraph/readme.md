@@ -33,6 +33,19 @@ Type: `Promise<void>`
 | `--color` | Text color of the typography |
 
 
+## Dependencies
+
+### Depends on
+
+- [resize-observer](../../resize-observer)
+
+### Graph
+```mermaid
+graph TD;
+  mi-paragraph --> resize-observer
+  style mi-paragraph fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

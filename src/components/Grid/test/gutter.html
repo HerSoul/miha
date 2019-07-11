@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/index.css">   <script src="/dist/miha.js"></script>
+</head>
+<body style="background: #f5f5f5">
+<h4>text</h4>
+<div>
+  <mi-title>gutter</mi-title>
+  <mi-row id="gutter">
+    <mi-col span="4">span=4</mi-col>
+    <mi-col span="4">span=4</mi-col>
+    <mi-col span="8">span=8</mi-col>
+    <mi-col span="8">span=8</mi-col>
+  </mi-row>
+</div>
+</body>
+<style>
+  .mi-col>div{
+    height: 50px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #0bb8cc;color: #fff;
+    line-height: 50px;
+  }
+  mi-col:nth-child(2n+1) .mi-col>div{
+    background-color: #3099af;color: #fff;
+  }
+</style>
+<script>
+
+document.getElementById('gutter').gutter={
+  xs:6,
+  sm:8,
+  md:10,
+  lg:12,
+  xl:14,
+  xxl:16
+}
+</script>
+</html>

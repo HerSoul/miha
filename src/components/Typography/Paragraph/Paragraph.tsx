@@ -1,6 +1,7 @@
 import {Component, ComponentInterface, Prop, h, Element,State,Method} from '@stencil/core';
 import { Ellipsis } from "../../../interface";
-import { addStyles } from '../../../utils/styles'
+import { addStyles,isStyleSupport } from '../../../utils/styles'
+import { measure } from './measure'
 @Component({
   tag: 'mi-paragraph',
   styleUrl: '../typography.scss',
@@ -9,6 +10,8 @@ import { addStyles } from '../../../utils/styles'
 export class Paragraph  implements ComponentInterface {
 
   @State() isExpend : boolean = false;
+
+  @State() isSupportEllipsis : boolean = true;
 
   @Element() el!: HTMLElement;
   /**
@@ -21,23 +24,30 @@ export class Paragraph  implements ComponentInterface {
    */
   @Prop() props: {[prop: string]: any} ;
 
-  @Method() toggleExpand(){
+  @Method() async toggleExpand(){
     this.isExpend = !this.isExpend;
     if((this.ellipsis as Ellipsis).onExpand){
       (this.ellipsis as Ellipsis).onExpand(this.isExpend);
     }
   }
-
+  resize(){
+    console.log(this.el);
+  }
   componentDidLoad() {
     const { ellipsis } = this;
     if(!ellipsis)return;
     const ellipsisInfo = (ellipsis as Ellipsis);
-    console.log(this.el.shadowRoot.querySelector('p'));
     if(ellipsisInfo.row){
       this.isExpend=ellipsisInfo.expaned;
-      addStyles(this.el.shadowRoot,{
-        '-webkit-line-clamp': ellipsisInfo.row
-      },'span')
+      if(isStyleSupport('-webkit-line-clamp')){
+        this.isSupportEllipsis = true;
+        addStyles(this.el.shadowRoot,{
+          '-webkit-line-clamp': ellipsisInfo.row
+        },'span')
+      }else{
+        this.isSupportEllipsis = false;
+        measure(this.el,ellipsisInfo)
+      }
     }
   }
 
@@ -59,15 +69,16 @@ export class Paragraph  implements ComponentInterface {
   }
 
   render(){
-    let text = this.isExpend ? '收起' :'展开';
+    // let text = this.isExpend ? '收起' :'展开';
     return(
-      // @ts-ignore
-      h('p',{
-        // @ts-ignore
-      },h('span',{},h('slot',{})),h('a',{
-        class:{'mi-typography-expend':true},
-        onClick:this.toggleExpand
-      },text))
+      <resize-observer resize={this.resize.bind(this)}>
+        {
+          // @ts-ignore
+          h('p',{
+            // @ts-ignore
+          },h('span',{},h('slot',{})))
+        }
+      </resize-observer>
     )
 
   }

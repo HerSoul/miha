@@ -6,6 +6,9 @@ import {Component, ComponentInterface, Listen, Prop} from '@stencil/core';
   shadow: true
 })
 export class Typography implements ComponentInterface {
+  /**
+   * 代办
+   */
 
   /**
    * 用户提交编辑内容时触发

@@ -1,17 +1,19 @@
-import { Color, CssClassMap } from '../interface';
+import { Color, CssClassMap,BreakpointMap } from '../interface';
 
-export const SIZE_TO_MEDIA: any = {
+export const SIZE_TO_MEDIA: BreakpointMap = {
   'xs': '(min-width: 0px)',
   'sm': '(min-width: 576px)',
   'md': '(min-width: 768px)',
   'lg': '(min-width: 992px)',
   'xl': '(min-width: 1200px)',
+  'xxl':'(min-width: 1600px)'
 };
 
 // Check if the window matches the media query
 // at the breakpoint passed
 // e.g. matchBreakpoint('sm') => true if screen width exceeds 576px
-export function matchBreakpoint(win: Window, breakpoint: string | undefined) {
+export function matchBreakpoint( breakpoint: string | undefined) {
+  const win=window;
   if (breakpoint === undefined || breakpoint === '') {
     return true;
   }
@@ -72,3 +74,18 @@ export function isStyleSupport(styleName: string | Array<string>): boolean {
   }
   return false;
 }
+
+export function pxToNumber(value: string | null): number {
+  if (!value) return 0;
+
+  const match = value.match(/^\d*(\.\d*)?/);
+
+  return match ? Number(match[0]) : 0;
+}
+
+export function styleToString(style: CSSStyleDeclaration) {
+  const styleNames: string[] = Array.prototype.slice.apply(style);
+  return styleNames.map(name => `${name}: ${style.getPropertyValue(name)};`).join('');
+}
+
+

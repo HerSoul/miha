@@ -50,7 +50,17 @@ export function debounceEvent(event: EventEmitter, wait: number): EventEmitter {
     emit: debounce(original.emit.bind(original), wait)
   } as EventEmitter;
 }
-
+export function debounceRaf(cb) {
+  let rafId;
+  const raf = window.requestAnimationFrame,
+        caf = window.cancelAnimationFrame;
+  if(raf){
+    caf(rafId);
+    rafId=raf(cb)
+  }else{
+    debounce(cb,16)
+  }
+}
 export function debounce(func: (...args: any[]) => void, wait = 0) {
   let timer: any;
   return (...args: any[]): any => {
@@ -58,7 +68,11 @@ export function debounce(func: (...args: any[]) => void, wait = 0) {
     timer = setTimeout(func, wait, ...args);
   };
 }
-
+export function getParentNodeAttr(el:HTMLElement,attr:string):any {
+   if(!el||!attr)return;
+   return el.parentElement.getAttribute(attr);
+}
 export function includeHttp(str:string):boolean {
   return str.includes('http');
 }
+
