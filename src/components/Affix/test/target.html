@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="/dist/miha.js"></script>
+</head>
+<body style="background: #f5f5f5">
+<div id="wapper">
+  <div style="height: 2000px;width: 100%"></div>
+  <mi-affix>
+    <mi-button>Affix</mi-button>
+  </mi-affix>
+  <div style="height: 2000px;width: 100%"></div>
+</div>
+12123213
+<br>
+<br>
+<div id="fixwapper">
+  <div style="height: 2000px;width: 100%"></div>
+  <mi-affix id="affix">
+    <mi-button>Affix</mi-button>
+  </mi-affix>
+  <div style="height: 2000px;width: 100%"></div>
+</div>
+
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+</body>
+<style>
+  #wapper{
+    width: 400px;
+    height: 300px;
+    background-color: darkseagreen;
+    overflow-y: scroll;
+    margin-top: 40px;
+  }
+  #fixwapper{
+    width: 400px;
+    height: 300px;
+    background-color: darkorange;
+    overflow-y: scroll;
+    margin-top: 40px;
+  }
+   mi-button{
+  }
+</style>
+<script>
+  var target = () => document.getElementById('wapper');
+  var targets = () => document.getElementById('fixwapper')
+  document.querySelector('mi-affix').top = 20;
+  document.querySelector('mi-affix').target = target;
+  document.querySelector('#affix').top = 20;
+  document.querySelector('#affix').target = targets;
+  window.addEventListener('scroll',()=>{
+    document.querySelector('#affix').updatePosition();
+  })
+</script>
+</html>

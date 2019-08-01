@@ -96,6 +96,7 @@ $font-size-lg: $font-size-base + 2px;
 $font-size-sm: 12px;
 $line-height-base: 1.5;
 $text-color:rgba(0,0,0,.65);
+$text-gary-color:rgba(0,0,0,0.45);
 $border-radius-base: 4px;
 $border-radius-sm: 2px;
 
@@ -163,3 +164,6 @@ $shadow-2: 0 4px 12px $shadow-color;
 
 //grid
 $TOALL_COLS : 24;
+
+// Zindex
+$AFFIX : 1000;

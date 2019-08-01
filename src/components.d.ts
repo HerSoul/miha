@@ -7,6 +7,9 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  Route,
+} from './components/Breadcrumb/type';
+import {
   BtnType,
   ColAttrs,
   Color,
@@ -18,6 +21,59 @@ import {
 } from './interface';
 
 export namespace Components {
+  interface MiAffix {
+    /**
+    * 距离窗口底部达到指定偏移量
+    */
+    'bottom': number;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数
+    */
+    'target': ()=>HTMLElement|Window;
+    /**
+    * 距离窗口顶部达到指定偏移量
+    */
+    'top': number;
+    'updatePosition': () => Promise<void>;
+  }
+  interface MiBreadcrumb {
+    /**
+    * 路由的参数
+    */
+    'params': Object;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': { [prop: string]: any };
+    /**
+    * 根据路由信息，自定义面包屑每一项
+    */
+    'renderItem'?: (route: Route, params: Object, routes: Array<Route>) => HTMLElement;
+    /**
+    * 路由栈信息
+    */
+    'routes': Array<Route>;
+    /**
+    * 分隔符自定义
+    */
+    'separator': String | HTMLElement;
+  }
+  interface MiBreadcrumbItem {
+    '_separator': string;
+    'handelClick': () => Promise<void>;
+    /**
+    * 链接的目的地
+    */
+    'href': string;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': { [prop: string]: any };
+  }
   interface MiButton {
     /**
     * 按钮颜色，可选值见 colors
@@ -118,6 +174,64 @@ export namespace Components {
     */
     'theme': IconTheme;
   }
+  interface MiPagination {
+    /**
+    * 页码改变的回调，参数是改变后的页码及每页条数
+    */
+    'change': Function;
+    /**
+    * 当前页数
+    */
+    'current': number;
+    /**
+    * 默认当前页数
+    */
+    'defaultCurrent': number;
+    /**
+    * 默认的每页条数
+    */
+    'defaultPageSize': number;
+    /**
+    * 禁用分页
+    */
+    'disabled': boolean;
+    /**
+    * 只有一页时是否隐藏分页器
+    */
+    'hideOnSinglePage': boolean;
+    /**
+    * 组件布局，子组件名用逗号分隔
+    */
+    'layout': string;
+    /**
+    * 每页条数
+    */
+    'pageSize': number;
+    /**
+    * 指定每页可以显示多少条
+    */
+    'pageSizeOptions': Array<number>;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 用于自定义页码的结构
+    */
+    'renderItem': Function;
+    /**
+    * 当添加该属性时，显示为简单分页
+    */
+    'simple': boolean;
+    /**
+    * size	当为「small」时，是小尺寸分页
+    */
+    'size': string;
+    /**
+    * 数据总数
+    */
+    'total': number;
+  }
   interface MiParagraph {
     /**
     * 自动溢出省略
@@ -201,6 +315,24 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLMiAffixElement extends Components.MiAffix, HTMLStencilElement {}
+  var HTMLMiAffixElement: {
+    prototype: HTMLMiAffixElement;
+    new (): HTMLMiAffixElement;
+  };
+
+  interface HTMLMiBreadcrumbElement extends Components.MiBreadcrumb, HTMLStencilElement {}
+  var HTMLMiBreadcrumbElement: {
+    prototype: HTMLMiBreadcrumbElement;
+    new (): HTMLMiBreadcrumbElement;
+  };
+
+  interface HTMLMiBreadcrumbItemElement extends Components.MiBreadcrumbItem, HTMLStencilElement {}
+  var HTMLMiBreadcrumbItemElement: {
+    prototype: HTMLMiBreadcrumbItemElement;
+    new (): HTMLMiBreadcrumbItemElement;
+  };
+
   interface HTMLMiButtonElement extends Components.MiButton, HTMLStencilElement {}
   var HTMLMiButtonElement: {
     prototype: HTMLMiButtonElement;
@@ -217,6 +349,12 @@ declare global {
   var HTMLMiIconElement: {
     prototype: HTMLMiIconElement;
     new (): HTMLMiIconElement;
+  };
+
+  interface HTMLMiPaginationElement extends Components.MiPagination, HTMLStencilElement {}
+  var HTMLMiPaginationElement: {
+    prototype: HTMLMiPaginationElement;
+    new (): HTMLMiPaginationElement;
   };
 
   interface HTMLMiParagraphElement extends Components.MiParagraph, HTMLStencilElement {}
@@ -261,9 +399,13 @@ declare global {
     new (): HTMLRippleEffectElement;
   };
   interface HTMLElementTagNameMap {
+    'mi-affix': HTMLMiAffixElement;
+    'mi-breadcrumb': HTMLMiBreadcrumbElement;
+    'mi-breadcrumb-item': HTMLMiBreadcrumbItemElement;
     'mi-button': HTMLMiButtonElement;
     'mi-col': HTMLMiColElement;
     'mi-icon': HTMLMiIconElement;
+    'mi-pagination': HTMLMiPaginationElement;
     'mi-paragraph': HTMLMiParagraphElement;
     'mi-row': HTMLMiRowElement;
     'mi-text': HTMLMiTextElement;
@@ -275,6 +417,59 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface MiAffix extends JSXBase.HTMLAttributes<HTMLMiAffixElement> {
+    /**
+    * 距离窗口底部达到指定偏移量
+    */
+    'bottom'?: number;
+    'onChange'?: (event: CustomEvent<boolean>) => void;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数
+    */
+    'target'?: ()=>HTMLElement|Window;
+    /**
+    * 距离窗口顶部达到指定偏移量
+    */
+    'top'?: number;
+  }
+  interface MiBreadcrumb extends JSXBase.HTMLAttributes<HTMLMiBreadcrumbElement> {
+    /**
+    * 路由的参数
+    */
+    'params'?: Object;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: { [prop: string]: any };
+    /**
+    * 根据路由信息，自定义面包屑每一项
+    */
+    'renderItem'?: (route: Route, params: Object, routes: Array<Route>) => HTMLElement;
+    /**
+    * 路由栈信息
+    */
+    'routes'?: Array<Route>;
+    /**
+    * 分隔符自定义
+    */
+    'separator'?: String | HTMLElement;
+  }
+  interface MiBreadcrumbItem extends JSXBase.HTMLAttributes<HTMLMiBreadcrumbItemElement> {
+    '_separator'?: string;
+    /**
+    * 链接的目的地
+    */
+    'href'?: string;
+    'onOnClick'?: (event: CustomEvent<Route>) => void;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: { [prop: string]: any };
+  }
   interface MiButton extends JSXBase.HTMLAttributes<HTMLMiButtonElement> {
     /**
     * 按钮颜色，可选值见 colors
@@ -373,6 +568,64 @@ declare namespace LocalJSX {
     */
     'theme'?: IconTheme;
   }
+  interface MiPagination extends JSXBase.HTMLAttributes<HTMLMiPaginationElement> {
+    /**
+    * 页码改变的回调，参数是改变后的页码及每页条数
+    */
+    'change'?: Function;
+    /**
+    * 当前页数
+    */
+    'current'?: number;
+    /**
+    * 默认当前页数
+    */
+    'defaultCurrent'?: number;
+    /**
+    * 默认的每页条数
+    */
+    'defaultPageSize'?: number;
+    /**
+    * 禁用分页
+    */
+    'disabled'?: boolean;
+    /**
+    * 只有一页时是否隐藏分页器
+    */
+    'hideOnSinglePage'?: boolean;
+    /**
+    * 组件布局，子组件名用逗号分隔
+    */
+    'layout'?: string;
+    /**
+    * 每页条数
+    */
+    'pageSize'?: number;
+    /**
+    * 指定每页可以显示多少条
+    */
+    'pageSizeOptions'?: Array<number>;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 用于自定义页码的结构
+    */
+    'renderItem'?: Function;
+    /**
+    * 当添加该属性时，显示为简单分页
+    */
+    'simple'?: boolean;
+    /**
+    * size	当为「small」时，是小尺寸分页
+    */
+    'size'?: string;
+    /**
+    * 数据总数
+    */
+    'total'?: number;
+  }
   interface MiParagraph extends JSXBase.HTMLAttributes<HTMLMiParagraphElement> {
     /**
     * 自动溢出省略
@@ -445,9 +698,13 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'mi-affix': MiAffix;
+    'mi-breadcrumb': MiBreadcrumb;
+    'mi-breadcrumb-item': MiBreadcrumbItem;
     'mi-button': MiButton;
     'mi-col': MiCol;
     'mi-icon': MiIcon;
+    'mi-pagination': MiPagination;
     'mi-paragraph': MiParagraph;
     'mi-row': MiRow;
     'mi-text': MiText;

@@ -1,0 +1,46 @@
+:host {
+  /**
+ * @prop --width: 分页每一项最小宽度
+ * @prop --height: 分页每一项高度
+ * @prop --margin-right: 分页每一项间隔
+ * @prop --background-color: 分页每一项背景颜色
+ * @prop --border-color: 分页每一项边框颜色
+ * @prop --border-radius: 分页每一项圆角大小
+ * @prop --color-hover: hover上去的颜色
+ * @prop --color-actived: actived上去的颜色
+ */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+  font-size: $font-size-base;
+  font-variant: $font-variant-base;
+  line-height: $line-height-base;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  .mi-pagination-cell {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--width, 32px);
+    height: var(--height, 32px);
+    margin-right: var(--margin-right, 8px);;
+    line-height: 30px;
+    vertical-align: middle;
+    background-color: var(--background-color, #fff);
+    border: 1px solid var(--border-color, #d9d9d9);
+    border-radius: var(--border-radius, 4px);;
+    outline: 0;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      color: var(--color-hover, $primary);
+      border-color: var(--color-hover, $primary);
+    }
+    &.cell-active{
+      color: var(--color-actived, $primary);
+      border-color: var(--color-actived, $primary);
+    }
+  }
+}

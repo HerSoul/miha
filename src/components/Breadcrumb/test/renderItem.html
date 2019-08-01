@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="/dist/miha.js"></script>
+</head>
+<body style="background: #f5f5f5">
+<mi-title lv="4">routes</mi-title>
+<mi-breadcrumb id="routes">
+</mi-breadcrumb>
+</body>
+<style>
+
+</style>
+<script>
+  const routes = [
+    {
+      path: '#/index',
+      breadcrumbName: 'home',
+    },
+    {
+      path: '#/first',
+      breadcrumbName: 'first',
+      children: [
+        {
+          path: '#/general',
+          breadcrumbName: 'General',
+        },
+        {
+          path: '#/layout',
+          breadcrumbName: 'Layout',
+        },
+        {
+          path: '#/navigation',
+          breadcrumbName: 'Navigation',
+        },
+      ],
+    },
+    {
+      path: '#/second',
+      breadcrumbName: 'second',
+    },
+  ];
+
+  window.onload=function () {
+    document.getElementById('routes').separator = '>>>'
+    document.getElementById('routes').routes=routes;
+    document.getElementById('routes').renderItem=function (route,params,routes) {
+      var item =document.createElement('div');
+      item.innerHTML = route.breadcrumbName+route.path;
+      return item
+    };
+  }
+</script>
+</html>

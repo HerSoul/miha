@@ -75,4 +75,7 @@ export function getParentNodeAttr(el:HTMLElement,attr:string):any {
 export function includeHttp(str:string):boolean {
   return str.includes('http');
 }
+export function addEventListener(target:HTMLElement,eventName:string,listener:EventListenerOrEventListenerObject,options?:Object) {
+  return target.addEventListener(eventName,listener,options)
+}
 

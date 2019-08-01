@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="/dist/miha.js"></script>
+</head>
+<body style="background: #f5f5f5">
+<mi-title lv="4">default</mi-title>
+ <mi-breadcrumb>
+    <mi-breadcrumb-item>
+      Home
+    </mi-breadcrumb-item>
+   <mi-breadcrumb-item>
+     Page1
+   </mi-breadcrumb-item>
+   <mi-breadcrumb-item>
+     Page2
+   </mi-breadcrumb-item>
+ </mi-breadcrumb>
+<mi-title lv="4">separator Element</mi-title>
+<mi-breadcrumb id='separator'>
+  <mi-breadcrumb-item>
+    Home
+  </mi-breadcrumb-item>
+  <mi-breadcrumb-item>
+    Page1
+  </mi-breadcrumb-item>
+  <mi-breadcrumb-item>
+    Page2
+  </mi-breadcrumb-item>
+</mi-breadcrumb>
+<mi-title lv="4">icon</mi-title>
+<mi-breadcrumb>
+  <mi-breadcrumb-item>
+    <mi-icon icon="home"></mi-icon>
+    Home
+  </mi-breadcrumb-item>
+  <mi-breadcrumb-item href="/page1" id="click">
+    <mi-icon icon="person" ></mi-icon>
+    Page1
+  </mi-breadcrumb-item>
+  <mi-breadcrumb-item href="/page2">
+    Page2
+  </mi-breadcrumb-item >
+</mi-breadcrumb>
+</body>
+<style>
+
+</style>
+<script>
+  var separator = document.createElement('span');
+  var click = document.getElementById('click');
+  separator.innerHTML='>';
+  document.getElementById('separator').separator=separator;
+  click.addEventListener('click',function (e) {
+      alert(e)
+  })
+</script>
+</html>
