@@ -1,4 +1,4 @@
-:host {
+.mi-pagination {
   /**
  * @prop --width: 分页每一项最小宽度
  * @prop --height: 分页每一项高度
@@ -28,19 +28,82 @@
     margin-right: var(--margin-right, 8px);;
     line-height: 30px;
     vertical-align: middle;
+    padding: 0 6px;
     background-color: var(--background-color, #fff);
     border: 1px solid var(--border-color, #d9d9d9);
     border-radius: var(--border-radius, 4px);;
     outline: 0;
     cursor: pointer;
     user-select: none;
-    &:hover {
+    &:not(.mi-pagination-cell-disabled):hover {
       color: var(--color-hover, $primary);
       border-color: var(--color-hover, $primary);
     }
-    &.cell-active{
+    &.cell-active:not(.mi-pagination-dot-cell){
       color: var(--color-actived, $primary);
       border-color: var(--color-actived, $primary);
     }
   }
+  .mi-pagination-cell-disabled{
+    cursor: not-allowed;
+    color: #d9d9d9;
+  }
+  .mi-pagination-cell-total{
+    font-size: $font-size-base;
+    color: $text-color;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mi-pagination-dot-cell {
+    border: none;
+    background: transparent;
+    &:hover .mi-pagination-cell-ellipsis{
+        display: none;
+    }
+    &:hover .arrow_icon{
+      display: inline-flex;
+      color: $primary;
+    }
+  }
+  .arrow_icon{
+    display: none;
+  }
+}
+.mi-pagination-disabled{
+  .mi-pagination-cell{
+    color: $disabled-color ;
+    background: $disabled-bg ;
+    cursor: not-allowed;
+    border-color: transparent;
+    a{
+      cursor: not-allowed;
+    }
+    &:hover{
+      color: $disabled-color;
+      background: $disabled-bg;
+      border-color: transparent;
+    }
+    &.cell-active{
+      color: #fff !important;
+      background: #dbdbdb !important;
+      border-color: transparent !important;
+    }
+  }
+  .mi-pagination-dot-cell{
+    background: transparent;
+    &:hover{
+      background: transparent;
+    }
+    &:hover .mi-pagination-cell-ellipsis{
+      display: inline-flex;
+    }
+    &:hover .arrow_icon{
+      display: none;
+    }
+  }
+
+}
+.mi-pagination-small {
+
 }

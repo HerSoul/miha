@@ -38,7 +38,6 @@ export namespace Components {
     * 距离窗口顶部达到指定偏移量
     */
     'top': number;
-    'updatePosition': () => Promise<void>;
   }
   interface MiBreadcrumb {
     /**
@@ -152,6 +151,32 @@ export namespace Components {
     */
     'span': number;
   }
+  interface MiDivider {
+    /**
+    * 分割线样式类
+    */
+    'classNames': object;
+    /**
+    * 是否虚线
+    */
+    'dashed': boolean;
+    /**
+    * 分割线标题的位置
+    */
+    'orientation': 'left' | 'right' | 'center';
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': { [prop: string]: any };
+    /**
+    * 分割线样式对象
+    */
+    'styles': object;
+    /**
+    * 水平还是垂直类型
+    */
+    'type': 'horizontal' | 'vertical';
+  }
   interface MiIcon {
     /**
     * Icon 名，支持远程svg icon和自定义svg dom
@@ -173,6 +198,32 @@ export namespace Components {
     * 设置图标的类型
     */
     'theme': IconTheme;
+  }
+  interface MiPageHeader {
+    /**
+    * 自定义 back icon'
+    */
+    'backIcon': string;
+    /**
+    * 面包屑的配置
+    */
+    'breadcrumb': Array<Route>;
+    /**
+    * 返回按钮的点击事件
+    */
+    'onBack': ()=>void;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props': {[prop: string]: any};
+    /**
+    * 自定义的二级标题文字
+    */
+    'subTitle': string;
+    /**
+    * 自定义标题文字
+    */
+    'titles': string;
   }
   interface MiPagination {
     /**
@@ -214,7 +265,7 @@ export namespace Components {
     /**
     * 其他属性,如aria-无障碍属性等
     */
-    'props': {[prop: string]: any};
+    'props': { [prop: string]: any };
     /**
     * 用于自定义页码的结构
     */
@@ -224,9 +275,13 @@ export namespace Components {
     */
     'simple': boolean;
     /**
-    * size	当为「small」时，是小尺寸分页
+    * size  当为「small」时，是小尺寸分页
     */
     'size': string;
+    /**
+    * 快速跳转的页数
+    */
+    'skipNum': number;
     /**
     * 数据总数
     */
@@ -255,6 +310,62 @@ export namespace Components {
     'props': {[prop: string]: any};
     'renderChildNode': () => Promise<void>;
     'resize': () => Promise<void>;
+  }
+  interface MiStep {
+    /**
+    * 步骤的详情描述，可选
+    */
+    'description': string|Object;
+    /**
+    * 步骤图标的类型，可选
+    */
+    'icon': string|Object;
+    /**
+    * 指定状态。当不配置该属性时，会使用 Steps 的 current 来自动指定状态。可选：wait process finish error
+    */
+    'status': 'wait' | 'process' | 'finish' | 'error';
+    /**
+    * 标题
+    */
+    'titles': string;
+  }
+  interface MiSteps {
+    /**
+    * 步骤条类名
+    */
+    'classNames': string;
+    /**
+    * 指定当前步骤，从 0 开始记数。在子 Step 元素中，可以通过 status 属性覆盖状态
+    */
+    'current': number;
+    /**
+    * 指定步骤条方向。目前支持水平（horizontal）和竖直（vertical）两种方向
+    */
+    'direction': 'horizontal' | 'vertical';
+    /**
+    * 起始序号，从 0 开始记数
+    */
+    'initial': number;
+    /**
+    * 指定标签放置位置，默认水平放图标右侧，可选 vertical 放图标下方
+    */
+    'labelPlacement': 'horizontal' | 'vertical';
+    /**
+    * 点击切换步骤时触发
+    */
+    'onChanges': (number)=>void;
+    /**
+    * 点状步骤条，可以设置为一个 function，labelPlacement 将强制为 vertical
+    */
+    'progressDot': Boolean | Function;
+    /**
+    * 指定大小，目前支持普通（default）和迷你（small)
+    */
+    'size': 'default' | 'small';
+    /**
+    * 指定当前步骤的状态，可选 wait process finish error
+    */
+    'status': 'wait' | 'process' | 'finish' | 'error';
   }
   interface MiText {
     /**
@@ -345,10 +456,22 @@ declare global {
     new (): HTMLMiColElement;
   };
 
+  interface HTMLMiDividerElement extends Components.MiDivider, HTMLStencilElement {}
+  var HTMLMiDividerElement: {
+    prototype: HTMLMiDividerElement;
+    new (): HTMLMiDividerElement;
+  };
+
   interface HTMLMiIconElement extends Components.MiIcon, HTMLStencilElement {}
   var HTMLMiIconElement: {
     prototype: HTMLMiIconElement;
     new (): HTMLMiIconElement;
+  };
+
+  interface HTMLMiPageHeaderElement extends Components.MiPageHeader, HTMLStencilElement {}
+  var HTMLMiPageHeaderElement: {
+    prototype: HTMLMiPageHeaderElement;
+    new (): HTMLMiPageHeaderElement;
   };
 
   interface HTMLMiPaginationElement extends Components.MiPagination, HTMLStencilElement {}
@@ -367,6 +490,18 @@ declare global {
   var HTMLMiRowElement: {
     prototype: HTMLMiRowElement;
     new (): HTMLMiRowElement;
+  };
+
+  interface HTMLMiStepElement extends Components.MiStep, HTMLStencilElement {}
+  var HTMLMiStepElement: {
+    prototype: HTMLMiStepElement;
+    new (): HTMLMiStepElement;
+  };
+
+  interface HTMLMiStepsElement extends Components.MiSteps, HTMLStencilElement {}
+  var HTMLMiStepsElement: {
+    prototype: HTMLMiStepsElement;
+    new (): HTMLMiStepsElement;
   };
 
   interface HTMLMiTextElement extends Components.MiText, HTMLStencilElement {}
@@ -404,10 +539,14 @@ declare global {
     'mi-breadcrumb-item': HTMLMiBreadcrumbItemElement;
     'mi-button': HTMLMiButtonElement;
     'mi-col': HTMLMiColElement;
+    'mi-divider': HTMLMiDividerElement;
     'mi-icon': HTMLMiIconElement;
+    'mi-page-header': HTMLMiPageHeaderElement;
     'mi-pagination': HTMLMiPaginationElement;
     'mi-paragraph': HTMLMiParagraphElement;
     'mi-row': HTMLMiRowElement;
+    'mi-step': HTMLMiStepElement;
+    'mi-steps': HTMLMiStepsElement;
     'mi-text': HTMLMiTextElement;
     'mi-title': HTMLMiTitleElement;
     'mi-typography': HTMLMiTypographyElement;
@@ -546,6 +685,32 @@ declare namespace LocalJSX {
     */
     'span'?: number;
   }
+  interface MiDivider extends JSXBase.HTMLAttributes<HTMLMiDividerElement> {
+    /**
+    * 分割线样式类
+    */
+    'classNames'?: object;
+    /**
+    * 是否虚线
+    */
+    'dashed'?: boolean;
+    /**
+    * 分割线标题的位置
+    */
+    'orientation'?: 'left' | 'right' | 'center';
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: { [prop: string]: any };
+    /**
+    * 分割线样式对象
+    */
+    'styles'?: object;
+    /**
+    * 水平还是垂直类型
+    */
+    'type'?: 'horizontal' | 'vertical';
+  }
   interface MiIcon extends JSXBase.HTMLAttributes<HTMLMiIconElement> {
     /**
     * Icon 名，支持远程svg icon和自定义svg dom
@@ -567,6 +732,32 @@ declare namespace LocalJSX {
     * 设置图标的类型
     */
     'theme'?: IconTheme;
+  }
+  interface MiPageHeader extends JSXBase.HTMLAttributes<HTMLMiPageHeaderElement> {
+    /**
+    * 自定义 back icon'
+    */
+    'backIcon'?: string;
+    /**
+    * 面包屑的配置
+    */
+    'breadcrumb'?: Array<Route>;
+    /**
+    * 返回按钮的点击事件
+    */
+    'onBack'?: ()=>void;
+    /**
+    * 其他属性,如aria-无障碍属性等
+    */
+    'props'?: {[prop: string]: any};
+    /**
+    * 自定义的二级标题文字
+    */
+    'subTitle'?: string;
+    /**
+    * 自定义标题文字
+    */
+    'titles'?: string;
   }
   interface MiPagination extends JSXBase.HTMLAttributes<HTMLMiPaginationElement> {
     /**
@@ -608,7 +799,7 @@ declare namespace LocalJSX {
     /**
     * 其他属性,如aria-无障碍属性等
     */
-    'props'?: {[prop: string]: any};
+    'props'?: { [prop: string]: any };
     /**
     * 用于自定义页码的结构
     */
@@ -618,9 +809,13 @@ declare namespace LocalJSX {
     */
     'simple'?: boolean;
     /**
-    * size	当为「small」时，是小尺寸分页
+    * size  当为「small」时，是小尺寸分页
     */
     'size'?: string;
+    /**
+    * 快速跳转的页数
+    */
+    'skipNum'?: number;
     /**
     * 数据总数
     */
@@ -645,6 +840,62 @@ declare namespace LocalJSX {
     * 其他属性,如aria-无障碍属性等
     */
     'props'?: {[prop: string]: any};
+  }
+  interface MiStep extends JSXBase.HTMLAttributes<HTMLMiStepElement> {
+    /**
+    * 步骤的详情描述，可选
+    */
+    'description'?: string|Object;
+    /**
+    * 步骤图标的类型，可选
+    */
+    'icon'?: string|Object;
+    /**
+    * 指定状态。当不配置该属性时，会使用 Steps 的 current 来自动指定状态。可选：wait process finish error
+    */
+    'status'?: 'wait' | 'process' | 'finish' | 'error';
+    /**
+    * 标题
+    */
+    'titles'?: string;
+  }
+  interface MiSteps extends JSXBase.HTMLAttributes<HTMLMiStepsElement> {
+    /**
+    * 步骤条类名
+    */
+    'classNames'?: string;
+    /**
+    * 指定当前步骤，从 0 开始记数。在子 Step 元素中，可以通过 status 属性覆盖状态
+    */
+    'current'?: number;
+    /**
+    * 指定步骤条方向。目前支持水平（horizontal）和竖直（vertical）两种方向
+    */
+    'direction'?: 'horizontal' | 'vertical';
+    /**
+    * 起始序号，从 0 开始记数
+    */
+    'initial'?: number;
+    /**
+    * 指定标签放置位置，默认水平放图标右侧，可选 vertical 放图标下方
+    */
+    'labelPlacement'?: 'horizontal' | 'vertical';
+    /**
+    * 点击切换步骤时触发
+    */
+    'onChanges'?: (number)=>void;
+    /**
+    * 点状步骤条，可以设置为一个 function，labelPlacement 将强制为 vertical
+    */
+    'progressDot'?: Boolean | Function;
+    /**
+    * 指定大小，目前支持普通（default）和迷你（small)
+    */
+    'size'?: 'default' | 'small';
+    /**
+    * 指定当前步骤的状态，可选 wait process finish error
+    */
+    'status'?: 'wait' | 'process' | 'finish' | 'error';
   }
   interface MiText extends JSXBase.HTMLAttributes<HTMLMiTextElement> {
     /**
@@ -703,10 +954,14 @@ declare namespace LocalJSX {
     'mi-breadcrumb-item': MiBreadcrumbItem;
     'mi-button': MiButton;
     'mi-col': MiCol;
+    'mi-divider': MiDivider;
     'mi-icon': MiIcon;
+    'mi-page-header': MiPageHeader;
     'mi-pagination': MiPagination;
     'mi-paragraph': MiParagraph;
     'mi-row': MiRow;
+    'mi-step': MiStep;
+    'mi-steps': MiSteps;
     'mi-text': MiText;
     'mi-title': MiTitle;
     'mi-typography': MiTypography;

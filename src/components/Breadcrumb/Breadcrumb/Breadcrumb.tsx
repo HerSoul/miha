@@ -72,20 +72,13 @@ export class Breadcrumb implements ComponentInterface {
     }
   }
 
-  defaultRenderItem(route, params, routes){
-      console.log(route, params, routes);
-      return (
-        <mi-breadcrumb-item _separator={this.renderSeparator() as string}>
-          {route.breadcrumbName}
-        </mi-breadcrumb-item>
-      )
-  }
+
 
   unifyRenderFn=(route: Route, params: Object, routes: Array<Route>)=>{
       if(this.renderItem){
         return this.renderItem(route, params, routes)
       }else {
-       return this.defaultRenderItem(route, params, routes)
+        return (<span>{route.breadcrumbName}</span>)
       }
    }
 
@@ -97,7 +90,9 @@ export class Breadcrumb implements ComponentInterface {
          return (<mi-breadcrumb-item innerHTML={elementToString(element,true)} _separator={this.renderSeparator() as string}>
          </mi-breadcrumb-item>)
        }
-       return element
+       return (<mi-breadcrumb-item  _separator={this.renderSeparator() as string}>
+         {element}
+       </mi-breadcrumb-item>)
      })
    }
 

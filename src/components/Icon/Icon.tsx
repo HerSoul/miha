@@ -93,7 +93,6 @@ export class MiIcom {
   }
   render() {
     const { icon,theme,props,content ,spinner } = this;
-      console.log(content);
       return (
         <Host
           class={{

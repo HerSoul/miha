@@ -1,0 +1,86 @@
+:host {
+  /**
+  * @prop --background: Background of the divider
+  * @prop --stroke: stroke of divider
+  * @props --margin: margin of divider
+  */
+}
+
+.mi-divider{
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+  font-size: $font-size-base;
+  font-variant: $font-variant-base;
+  line-height: $line-height-base;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  position: relative;
+}
+.mi-divider-horizontal{
+  display: block;
+  clear: both;
+  width: 100%;
+  min-width: 100%;
+  height: 1px;
+  margin: var(--margin,24px) 0;
+  border-top:var(--stroke,1px) solid  var(--background-color,#e8e8e8);
+}
+.mi-divider-dashed {
+  border-top:var(--stroke,1px) dashed  var(--background-color,#e8e8e8);
+}
+.mi-divider-vertical {
+  position: relative;
+  display: inline-block;
+  width: 1px;
+  height: .9em;
+  margin: 0 8px;
+  vertical-align: middle;
+  background-color:var(--background-color,#e8e8e8);
+}
+.mi-divider-with-text{
+  display: table;
+  margin: 16px 0;
+  border-top: none;
+  &:before,&:after{
+    position: relative;
+    top: 50%;
+    display: table-cell;
+    width: 50%;
+    border-top: 1px solid #e8e8e8;
+    transform: translateY(50%);
+    content: '';
+  }
+  &.mi-divider-left {
+    &:before{
+      top: 50%;
+      width: 5%;
+    }
+    &:after{
+      top: 50%;
+      width: 95%
+    }
+  }
+  &.mi-divider-right {
+    &:before{
+      top: 50%;
+      width: 95%;
+    }
+    &:after{
+      top: 50%;
+      width: 5%
+    }
+  }
+}
+.mi-divider-text {
+  color: rgba(0,0,0,0.85);
+  font-weight: 500;
+  padding: 0 10px;
+  font-size: 16px;
+  white-space: nowrap;
+  text-align: center;
+  background: transparent;
+}
+

@@ -78,4 +78,10 @@ export function includeHttp(str:string):boolean {
 export function addEventListener(target:HTMLElement,eventName:string,listener:EventListenerOrEventListenerObject,options?:Object) {
   return target.addEventListener(eventName,listener,options)
 }
-
+export function getCapitalUpLower(type:'lower'|'upper'='upper',letter:string) {
+  let letterArr = letter.split(' ');
+  if(letterArr.length>0){
+    type=='upper'?letterArr[0]=letterArr[0].toLocaleUpperCase():letterArr[0]=letterArr[0].toLocaleLowerCase()
+  }
+  return letterArr.join('');
+}

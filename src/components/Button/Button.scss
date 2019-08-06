@@ -100,7 +100,7 @@
     // normal
    :host(.mi-btn-fill.mi-color-#{$color}){
       background-color:current-color(base);
-      color: var(--color-hover,$light);
+      color: var(--color,$light);
       border: none !important;
     }
     :host(.mi-btn-ghost){

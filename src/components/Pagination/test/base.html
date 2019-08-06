@@ -9,14 +9,69 @@
   <link rel="stylesheet" href="/css/index.css">
   <script src="/dist/miha.js"></script>
 </head>
-<body style="background: #f5f5f5">
-<mi-title lv="4">default</mi-title>
-<mi-pagination total=48  page-size=4></mi-pagination>
+<body style="background: #fff">
+<div>
+  <mi-title lv="4">default</mi-title>
+  <mi-pagination total=50  page-size=4></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">current</mi-title>
+  <mi-pagination total=500 current=10  page-size=10></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">pageSize</mi-title>
+  <mi-pagination total=500 current=10  page-size=100></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">disabled</mi-title>
+  <mi-pagination disabled total=500 current=10  page-size=10></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">hideOnSinglePage:true</mi-title>
+  <mi-pagination hide-on-single-page total=10  page-size=10></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">hideOnSinglePage:false</mi-title>
+  <mi-pagination hide-on-single-page=false total=10  page-size=10></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">renderItem</mi-title>
+  <mi-pagination id="renderItem"  total=10000  page-size=10></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">simple</mi-title>
+  <mi-pagination id="simple" simple  total=10000  page-size=10></mi-pagination>
+</div>
+<div>
+  <mi-title lv="4">size = small</mi-title>
+  <mi-pagination id="simple" size="small"  total=10000  page-size=10></mi-pagination>
+</div>
 </body>
 <style>
 
 </style>
 <script>
+let renderItem = document.getElementById('renderItem');
+renderItem.renderItem=function(cell,type,orginEle){
+  console.log(cell,type);
 
+  var a=document.createElement('a');
+  if(cell.index%2==0){
+    a.style.color='red';
+  }else{
+    a.style.color='blue';
+  }
+  if(type=='prev'){
+    a.innerText='prev'
+  }else if(type=='next'){
+    a.innerText='next'
+  }else{
+    a.innerText=cell.index
+  }
+  if(type=='total'){
+    return orginEle
+  }
+  return a
+}
 </script>
 </html>

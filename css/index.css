@@ -294,15 +294,9 @@ a {
   outline: none;
   cursor: pointer;
   transition: color 0.3s;
-  -webkit-text-decoration-skip: objects
-}
+  -webkit-text-decoration-skip: objects;
+  color: currentColor;
 
-a:hover {
-  color: #28e070
-}
-
-a:active {
-  color: #0ec254
 }
 
 a:active, a:hover {

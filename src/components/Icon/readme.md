@@ -24,6 +24,21 @@
 | `--size`  | 图标的大小       |
 
 
+## Dependencies
+
+### Used by
+
+ - [mi-page-header](../PageHeader)
+ - [mi-pagination](../Pagination)
+
+### Graph
+```mermaid
+graph TD;
+  mi-page-header --> mi-icon
+  mi-pagination --> mi-icon
+  style mi-icon fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

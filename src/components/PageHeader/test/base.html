@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/index.css">   <script src="/dist/miha.js"></script>
+</head>
+<body style="padding: 16px">
+<mi-title lv="4">base</mi-title>
+<mi-page-header id="breadcrumb" title="Title" sub-title="sub-title" style="border: 1px solid #eaeaea">
+  <span slot="tags">
+    <span>tag1</span>
+    <span>tag2</span>
+    <span>tag3</span>
+  </span>
+  <span slot="end">
+   <mi-button>action</mi-button>
+   <mi-button variant="fill">primary</mi-button>
+  </span>
+  <div style="margin-top: 12px;">
+    <mi-title lv="4">TEST</mi-title>
+    <mi-paragraph>
+      Lorem ipsum dolor  <mi-text theme="mark">mark Theme</mi-text> sit amet, consectetur adipisicing elit. Assumenda commodi earum impedit ipsa molestiae perspiciatis placeat temporibus vero voluptatum. Eaque ipsum itaque non nostrum quam, rerum similique sit voluptatem voluptatibus?
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eos in porro praesentium quae quasi vel vitae. Autem consequuntur cum, ea explicabo incidunt iste laboriosam, nostrum, quaerat quasi quos voluptatem.
+    </mi-paragraph>
+    <mi-divider></mi-divider>
+    <mi-paragraph>
+      Lorem ipsum dolor  <mi-text theme="mark">mark Theme</mi-text> sit amet, consectetur adipisicing elit. Assumenda commodi earum impedit ipsa molestiae perspiciatis placeat temporibus vero voluptatum. Eaque ipsum itaque non nostrum quam, rerum similique sit voluptatem voluptatibus?
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa eos in porro praesentium quae quasi vel vitae. Autem consequuntur cum, ea explicabo incidunt iste laboriosam, nostrum, quaerat quasi quos voluptatem.
+    </mi-paragraph>
+  </div>
+  <div slot="footer" style="margin-top: 24px;">
+    footer
+  </div>
+</mi-page-header>
+<div>
+</div>
+</body>
+<style>
+
+</style>
+<script>
+  const routes = [
+    {
+      path: '#/index',
+      breadcrumbName: 'home',
+    },
+    {
+      path: '#/first',
+      breadcrumbName: 'first',
+      children: [
+        {
+          path: '#/general',
+          breadcrumbName: 'General',
+        },
+        {
+          path: '#/layout',
+          breadcrumbName: 'Layout',
+        },
+        {
+          path: '#/navigation',
+          breadcrumbName: 'Navigation',
+        },
+      ],
+    },
+    {
+      path: '#/second',
+      breadcrumbName: 'second',
+    },
+  ];
+  document.getElementById('breadcrumb').breadcrumb=routes
+</script>
+</html>

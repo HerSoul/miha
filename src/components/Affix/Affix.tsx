@@ -7,7 +7,6 @@ import {
   h,
   State,
   EventEmitter,
-  Method,
   Event,
   Watch
 } from '@stencil/core';
@@ -132,10 +131,10 @@ export class Affix implements ComponentInterface {
     this.measure()
   }
 
-  @Method()
   updatePosition() {
     this.measure()
   }
+
   measure = () => {
     const offsetTop = this.getOffsetTop();
     const offsetBottom = this.getOffsetBottom();

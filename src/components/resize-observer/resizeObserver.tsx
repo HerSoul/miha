@@ -56,6 +56,5 @@ export class ResizeObserver  implements ComponentInterface {
         <slot></slot>
       </Host>
     )
-
   }
 }
